@@ -1,0 +1,3 @@
+---
+providerRegex: ^(talos-controlplane|talos-worker01|talos-worker02)$
+bypassDnsResolution: true
