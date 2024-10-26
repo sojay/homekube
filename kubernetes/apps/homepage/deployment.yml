@@ -31,8 +31,8 @@ spec:
           image: ghcr.io/gethomepage/homepage:latest
           resources:
             requests:
-              memory: 64Mi
-              cpu: 100m
+              memory: 128Mi
+              cpu: 200m
           ports:
             - containerPort: 3000
               name: http
