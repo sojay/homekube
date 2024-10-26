@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/target: external.samboxlab.top
+    gethomepage.dev/description: Dynamically Detected Homepage
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Cluster Management
+    gethomepage.dev/icon: homepage.png
+    gethomepage.dev/name: Homepage
+  generation: 1
+  labels:
+    kustomize.toolkit.fluxcd.io/name: homepage
+    kustomize.toolkit.fluxcd.io/namespace: flux-system
+    app: homepage
+  name: homepage
+  namespace: network
+spec:
+  ingressClassName: external
+  rules:
+  - host: dashboard.samboxlab.top
+    http:
+      paths:
+      - backend:
+          service:
+            name: homepage  # Ensure the correct service name
+            port:
+              number: 3000  # Since you have LoadBalancer service mapping 80 to 5001
+        path: /
+        pathType: Prefix
+  tls:
+    - hosts:
+      - dashboard.samboxlab.top
+      secretName: samboxlab-top-production-tls
