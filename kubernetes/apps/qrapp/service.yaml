@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: qrapp-svc
-  namespace: network
+  namespace: qrapp
 spec:
   selector:
     app: qrapp
