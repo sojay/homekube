@@ -8,7 +8,7 @@ metadata:
     kustomize.toolkit.fluxcd.io/name: qrcode-app
     kustomize.toolkit.fluxcd.io/namespace: flux-system
   name: qrapp
-  namespace: network
+  namespace: qrapp
 spec:
   ingressClassName: external
   rules:
