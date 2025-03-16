@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: homepage
-  namespace: network
+  namespace: myapps
   labels:
     app: homepage
   annotations:
@@ -11,7 +11,7 @@ spec:
   selector:
     matchLabels:
       app: homepage
-  replicas: 3
+  replicas: 2
   progressDeadlineSeconds: 600
   revisionHistoryLimit: 1
   strategy:
@@ -29,6 +29,9 @@ spec:
       containers:
         - name: homepage
           image: ghcr.io/gethomepage/homepage:latest
+          env:
+          -  name: HOMEPAGE_ALLOWED_HOSTS
+             value: "dashboard.samboxlab.top,192.168.0.129:3000"
           resources:
             requests:
               memory: 128Mi

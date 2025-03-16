@@ -14,7 +14,7 @@ metadata:
     kustomize.toolkit.fluxcd.io/namespace: flux-system
     app: homepage
   name: homepage
-  namespace: network
+  namespace: myapps
 spec:
   ingressClassName: external
   rules:
@@ -23,7 +23,7 @@ spec:
       paths:
       - backend:
           service:
-            name: homepage  # Ensure the correct service name
+            name: homepage-svc  # Ensure the correct service name
             port:
               number: 3000  # Since you have LoadBalancer service mapping 80 to 5001
         path: /

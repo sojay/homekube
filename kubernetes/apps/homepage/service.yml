@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: homepage
-  namespace: network
+  name: homepage-svc
+  namespace: myapps
   labels:
     app: homepage
   annotations:
@@ -13,5 +13,8 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - name: https
+      port: 443
+      targetPort: https
   selector:
     app: homepage
