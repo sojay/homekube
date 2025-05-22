@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: local-hostpath-test
+  namespace: default
+spec:
+  containers:
+  - name: local-hostpath-test
+    image: nginx
+    volumeMounts:
+    - mountPath: /test
+      name: local-storage
+  volumes:
+  - name: local-storage
+    persistentVolumeClaim:
+      claimName: local-hostpath-pvc

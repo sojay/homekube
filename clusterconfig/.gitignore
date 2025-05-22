@@ -1,0 +1,4 @@
+home-kubernetes-talos-controlplane.yaml
+home-kubernetes-talos-worker01.yaml
+home-kubernetes-talos-worker02.yaml
+talosconfig
