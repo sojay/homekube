@@ -16,11 +16,11 @@ cgroup:
 endpointRoutes:
   enabled: true
 envoy:
-  enabled: true
+  enabled: false
 dashboards:
   enabled: true
 hubble:
-  enabled: true
+  enabled: false
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.69.0.0/16"
