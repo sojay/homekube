@@ -1,0 +1,14 @@
+machine:
+  sysctls:
+    net.core.somaxconn: "65535"
+  install:
+    extensions:
+      - image: ghcr.io/siderolabs/extensions/iscsid:v1.5.0
+  kubelet:
+    extraMounts:
+      - destination: /var/lib/longhorn
+        type: bind
+        source: /var/lib/longhorn
+        options:
+          - bind
+          - rshared
