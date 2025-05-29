@@ -30,14 +30,6 @@ spec:
         enabled: false
       alertmanagerSpec:
         replicas: 1
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: longhorn
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 2Gi
     grafana:
       enabled: true
       defaultDashboardsTimezone: America/New_York
@@ -45,9 +37,7 @@ spec:
       ingress:
         enabled: false
       persistence:
-        enabled: true
-        storageClassName: longhorn
-        size: 2Gi
+        enabled: false
       plugins:
         - grafana-clock-panel
         - grafana-piechart-panel
@@ -73,16 +63,8 @@ spec:
         enabled: false
       prometheusSpec:
         replicas: 1
-        retention: 30d
-        retentionSize: 15GB
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: longhorn
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 20Gi
+        retention: 6h
+        retentionSize: 5GB
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
