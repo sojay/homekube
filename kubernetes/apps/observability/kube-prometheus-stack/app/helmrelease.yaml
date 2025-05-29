@@ -46,7 +46,7 @@ spec:
         enabled: false
       persistence:
         enabled: true
-        storageClassName: nfs-csi
+        storageClassName: openebs-hostpath
         size: 2Gi
       plugins:
         - grafana-clock-panel
