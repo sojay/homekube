@@ -3,6 +3,8 @@ originRequest:
   noTLSVerify: true
 
 ingress:
+  - hostname: "longhorn.${SECRET_DOMAIN}"
+    service: https://internal-ingress-nginx-controller.network.svc.cluster.local:443
   - hostname: "${SECRET_DOMAIN}"
     service: &svc http://external-ingress-nginx-controller.network.svc.cluster.local:80
   - hostname: "*.${SECRET_DOMAIN}"

@@ -15,7 +15,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - Longhorn'
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  ingressClassName: external
+  ingressClassName: internal
   tls:
     - hosts:
         - longhorn.samboxlab.top
