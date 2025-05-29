@@ -13,5 +13,5 @@ instance:
   sync:
     kind: GitRepository
     url: "https://github.com/sojay/homekube.git"
-    ref: "refs/heads/update-branch"
+    ref: "refs/heads/main"
     path: kubernetes/flux/cluster
