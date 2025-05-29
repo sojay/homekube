@@ -7,16 +7,34 @@ metadata:
 spec:
   providerRef:
     name: slack
-  eventSeverity: info
+  eventSeverity: error
   eventSources:
-  - kind: HelmRepository
-    name: podinfo
-  - kind: HelmChart
-    name: default-podinfo
-  - kind: HelmRelease
-    name: '*'
-    namespace: default
   - kind: GitRepository
     name: '*'
   - kind: Kustomization
+    name: '*'
+  - kind: HelmRelease
+    name: '*'
+    namespace: '*'
+  - kind: HelmRepository
+    name: '*'
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: flux-info
+  namespace: flux-system
+spec:
+  providerRef:
+    name: slack
+  eventSeverity: info
+  eventSources:
+  - kind: GitRepository
+    name: '*'
+  - kind: Kustomization
+    name: '*'
+  - kind: HelmRelease
+    name: '*'
+    namespace: '*'
+  - kind: HelmRepository
     name: '*'
