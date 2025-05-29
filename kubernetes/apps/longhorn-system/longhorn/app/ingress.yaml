@@ -38,4 +38,4 @@ metadata:
   namespace: longhorn-system
 type: Opaque
 data:
-  auth: YWRtaW46JGFwcjEkSDY1dnlzWjgkaE5WQ2pPa1lhVmJUM0lZZWtFTVJWLw==  # admin:longhorn
+  auth: YWRtaW46JGFwcjEkYmJYWGpsSTgkOHV0VFlDMDFzbHdIek9EVHdsbEdHLw==  # admin:zNVABzhvS5LIOXbtNr/UAw==
