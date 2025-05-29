@@ -4,6 +4,10 @@ kind: Ingress
 metadata:
   name: longhorn-ingress
   namespace: longhorn-system
+  labels:
+    app.kubernetes.io/name: longhorn
+    kustomize.toolkit.fluxcd.io/name: longhorn
+    kustomize.toolkit.fluxcd.io/namespace: flux-system
   annotations:
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
@@ -13,10 +17,10 @@ spec:
   ingressClassName: internal
   tls:
     - hosts:
-        - longhorn.home.samboxlab.top
-      secretName: longhorn-home-samboxlab-top-tls
+        - longhorn.samboxlab.top
+      secretName: samboxlab-top-production-tls
   rules:
-    - host: longhorn.home.samboxlab.top
+    - host: longhorn.samboxlab.top
       http:
         paths:
           - path: /

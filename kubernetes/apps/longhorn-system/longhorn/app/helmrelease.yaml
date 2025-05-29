@@ -79,10 +79,4 @@ spec:
 
     # Ingress for UI
     ingress:
-      enabled: true
-      ingressClassName: internal
-      host: longhorn.${SECRET_DOMAIN}
-      tls: true
-      tlsSecret: longhorn-tls
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
+      enabled: false
