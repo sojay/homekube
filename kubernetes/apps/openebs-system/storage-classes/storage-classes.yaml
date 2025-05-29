@@ -1,0 +1,45 @@
+---
+# Fast local storage for databases and high-performance workloads
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: openebs-hostpath
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: openebs.io/local
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+parameters:
+  storageType: hostpath
+  basePath: /var/openebs/local
+---
+# LVM-based storage with snapshots for databases
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: openebs-lvm
+  annotations:
+    openebs.io/cas-type: lvm
+provisioner: local.csi.openebs.io
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  storage: lvm
+  volgroup: openebs-vg
+---
+# High-performance replicated storage using Mayastor
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mayastor-nvmf
+  annotations:
+    openebs.io/cas-type: mayastor
+provisioner: io.openebs.csi-mayastor
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  repl: "2"
+  protocol: nvmf
+  fsType: ext4

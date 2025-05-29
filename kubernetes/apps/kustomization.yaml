@@ -6,6 +6,7 @@ resources:
   - ./default
   - ./flux-system
   - ./kube-system
+  - ./longhorn-system
   - ./network
   - ./observability
   - ./slack-alerts

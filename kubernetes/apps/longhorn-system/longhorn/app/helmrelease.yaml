@@ -1,0 +1,88 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: longhorn
+      version: 1.7.2
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    # Persistence settings
+    persistence:
+      defaultClass: false                    # Don't make it default
+      defaultClassReplicaCount: 1           # 1 replica for 2-node setup
+      reclaimPolicy: Retain
+      migratable: false
+      recurringJobSelector:
+        enable: true
+        jobList: '[{"name":"backup", "schedule":"0 2 * * *", "task":"backup"}]'
+
+    # CSI settings optimized for mixed workloads
+    csi:
+      kubeletRootDir: /var/lib/kubelet
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+
+    # UI and monitoring
+    ui:
+      replicas: 1
+
+    # Engine settings for better performance
+    engine:
+      replicaReplenishmentWaitInterval: 600
+
+    # Manager settings
+    manager:
+      priorityClass: system-cluster-critical
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+
+    # Driver settings
+    driver:
+      priorityClass: system-cluster-critical
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+
+    # Default settings for new volumes
+    defaultSettings:
+      defaultReplicaCount: 1
+      defaultDataPath: /var/lib/longhorn/
+      defaultLonghornStaticStorageClass: longhorn-static
+      backupstorePollInterval: 300
+      failedBackupTTL: 1440
+      restoreVolumeRecurringJobs: true
+      concurrentAutomaticEngineUpgradePerNodeLimit: 1
+      storageMinimalAvailablePercentage: 15
+      upgradeChecker: false
+      defaultDataLocality: best-effort
+      replicaAutoBalance: best-effort
+
+    # Ingress for UI
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      host: longhorn.${SECRET_DOMAIN}
+      tls: true
+      tlsSecret: longhorn-tls
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production

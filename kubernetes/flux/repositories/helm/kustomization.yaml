@@ -6,6 +6,7 @@ resources:
   - ./cilium.yaml
   - ./coredns.yaml
   - ./jetstack.yaml
+  - ./longhorn.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./postfinance.yaml
@@ -15,3 +16,4 @@ resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
+  - ./volsync.yaml

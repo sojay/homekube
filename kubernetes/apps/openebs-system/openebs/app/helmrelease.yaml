@@ -24,16 +24,21 @@ spec:
     engines:
       local:
         lvm:
-          enabled: false
+          enabled: true
         zfs:
           enabled: false
       replicated:
         mayastor:
-          enabled: false
+          enabled: true
+          etcd:
+            localpv:
+              enabled: true
+          loki-stack:
+            enabled: false
     openebs-crds:
       csi:
         volumeSnapshots:
-          enabled: false
+          enabled: true
     localpv-provisioner:
       localpv:
         image:
@@ -46,3 +51,13 @@ spec:
         name: openebs-hostpath
         isDefaultClass: false
         basePath: /var/openebs/local
+    mayastor:
+      csi:
+        node:
+          initContainers:
+            enabled: true
+      agents:
+        ha:
+          enabled: true
+          nodeSelector:
+            kubernetes.io/arch: amd64
