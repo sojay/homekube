@@ -49,7 +49,7 @@ repository_name: "sojay/homekube"
 
 # -- GitHub repository branch
 #    (OPTIONAL) / (DEFAULT: "main")
-repository_branch: "update-branch"
+repository_branch: "main"
 
 # -- Repository visibility (public or private)
 #    (OPTIONAL) / (DEFAULT: "public") / (NOTE: See the README for information when set private)
