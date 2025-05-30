@@ -73,8 +73,8 @@ spec:
         enabled: false
       prometheusSpec:
         replicas: 1
-        retention: 30d
-        retentionSize: 15GB
+        retention: 15d
+        retentionSize: 4GB
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
@@ -87,7 +87,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 5Gi
     nodeExporter:
       enabled: true
       serviceMonitor:
