@@ -65,7 +65,7 @@ spec:
           provider:
             foldersFromFilesStructure: true
         datasources:
-          enabled: true
+          enabled: false
           searchNamespace: ALL
       # Configure data sources with correct namespace URLs
       forceDeployDatasources: true
