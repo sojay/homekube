@@ -21,6 +21,9 @@ spec:
     remediation:
       retries: 3
   values:
+    # Ensure all resources are created in the correct namespace
+    namespaceOverride: "longhorn-system"
+
     # Persistence settings
     persistence:
       defaultClass: false                    # Don't make it default
