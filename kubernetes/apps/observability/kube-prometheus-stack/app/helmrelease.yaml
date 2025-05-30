@@ -67,23 +67,28 @@ spec:
         datasources:
           enabled: true
           searchNamespace: ALL
-      additionalDataSources:
-        - name: Prometheus
-          type: prometheus
-          uid: prometheus
-          url: http://kube-prometheus-stack-prometheus.observability:9090
-          access: proxy
-          isDefault: true
-          jsonData:
-            httpMethod: POST
-            timeInterval: 30s
-        - name: Alertmanager
-          type: alertmanager
-          uid: alertmanager
-          url: http://kube-prometheus-stack-alertmanager.observability:9093
-          access: proxy
-          jsonData:
-            handleGrafanaManagedAlerts: false
+      # Configure data sources with correct namespace URLs
+      forceDeployDatasources: true
+      datasources:
+        datasources.yaml:
+          apiVersion: 1
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              uid: prometheus
+              url: http://kube-prometheus-stack-prometheus.observability:9090
+              access: proxy
+              isDefault: true
+              jsonData:
+                httpMethod: POST
+                timeInterval: 30s
+            - name: Alertmanager
+              type: alertmanager
+              uid: alertmanager
+              url: http://kube-prometheus-stack-alertmanager.observability:9093
+              access: proxy
+              jsonData:
+                handleGrafanaManagedAlerts: false
     prometheus:
       enabled: true
       ingress:
