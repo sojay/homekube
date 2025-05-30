@@ -7,6 +7,8 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/exclude: "true"
     cert-manager.io/cluster-issuer: letsencrypt-production
+    cert-manager.io/secret-template: |
+      {"annotations": {"reflector.v1.k8s.emberstack.com/reflection-allowed": "true", "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": "longhorn-system,network,default"}}
 spec:
   ingressClassName: external
   tls:
@@ -33,6 +35,8 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/exclude: "true"
     cert-manager.io/cluster-issuer: letsencrypt-production
+    cert-manager.io/secret-template: |
+      {"annotations": {"reflector.v1.k8s.emberstack.com/reflection-allowed": "true", "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": "longhorn-system,network,default"}}
 spec:
   ingressClassName: external
   tls:
@@ -59,6 +63,8 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/exclude: "true"
     cert-manager.io/cluster-issuer: letsencrypt-production
+    cert-manager.io/secret-template: |
+      {"annotations": {"reflector.v1.k8s.emberstack.com/reflection-allowed": "true", "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": "longhorn-system,network,default"}}
 spec:
   ingressClassName: external
   tls:
