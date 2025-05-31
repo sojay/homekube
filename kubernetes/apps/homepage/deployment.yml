@@ -80,10 +80,14 @@ spec:
               name: homepage-config
               subPath: widgets.yaml
             - mountPath: /app/config/logs
-              name: logs
+              name: homepage-data
+              subPath: logs
+            - mountPath: /app/data
+              name: homepage-data
+              subPath: data
       volumes:
         - name: homepage-config
           configMap:
             name: homepage
-        - name: logs
+        - name: homepage-data
           emptyDir: {}

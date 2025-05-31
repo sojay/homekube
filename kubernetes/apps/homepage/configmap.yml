@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage
+  namespace: myapps
+data:
+  settings.yaml: |
+    title: "Home Lab Dashboard"
+    theme: dark
+    color: slate
+    headerStyle: clean
+    hideVersion: true
+
+  services.yaml: |
+    - Monitoring:
+        - Grafana:
+            href: https://grafana.samboxlab.top
+            description: Metrics and monitoring dashboards
+            icon: grafana.png
+        - Prometheus:
+            href: https://prometheus.samboxlab.top
+            description: Metrics collection and alerting
+            icon: prometheus.png
+        - Alertmanager:
+            href: https://alertmanager.samboxlab.top
+            description: Alert routing and management
+            icon: alertmanager.png
+
+    - Storage:
+        - Longhorn:
+            href: https://longhorn.samboxlab.top
+            description: Distributed block storage
+            icon: longhorn.png
+
+  widgets.yaml: |
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "cluster"
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+
+  bookmarks.yaml: |
+    - Homelab:
+        - Kubernetes Dashboard:
+            - href: https://dashboard.samboxlab.top
+        - Grafana:
+            - href: https://grafana.samboxlab.top
+
+  kubernetes.yaml: |
+    mode: cluster
+
+  docker.yaml: |
+    # Docker configuration (empty for k8s deployment)
+
+  custom.css: |
+    /* Custom CSS for homepage */
+
+  custom.js: |
+    /* Custom JavaScript for homepage */

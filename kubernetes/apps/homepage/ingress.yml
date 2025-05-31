@@ -8,6 +8,9 @@ metadata:
     gethomepage.dev/group: Cluster Management
     gethomepage.dev/icon: homepage.png
     gethomepage.dev/name: Homepage
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    cert-manager.io/secret-template.reflection-allowed: "true"
+    cert-manager.io/secret-template.reflection-allowed-namespaces: "longhorn-system,network,default"
   generation: 1
   labels:
     kustomize.toolkit.fluxcd.io/name: homepage

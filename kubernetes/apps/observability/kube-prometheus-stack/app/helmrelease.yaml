@@ -41,7 +41,10 @@ spec:
     grafana:
       enabled: true
       defaultDashboardsTimezone: America/New_York
-      adminPassword: admin
+      admin:
+        existingSecret: grafana-admin-secret
+        userKey: admin-user
+        passwordKey: admin-password
       ingress:
         enabled: false
       persistence:

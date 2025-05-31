@@ -1,0 +1,49 @@
+---
+csiDriver:
+  name: "nfs"
+
+storageClasses:
+- name: nfs
+  defaultClass: false
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+  allowVolumeExpansion: true
+  parameters:
+    fsType: nfs
+  mountOptions:
+  - noatime
+  - nfsvers=4
+  secrets:
+    provisioner-secret:
+    controller-publish-secret:
+    node-stage-secret:
+    node-publish-secret:
+    controller-expand-secret:
+
+volumeSnapshotClasses: []
+
+driver:
+  config:
+    driver: freenas-api-nfs
+    instance_id:
+    httpConnection:
+      protocol: http
+      host: 192.168.0.123  # Replace with your TrueNAS IP
+      port: 80
+      apiKey: 2-ZLbrlRi1XYABWKIFxwQZl7DartOJUSGEYZoGEcj9lfVTes8T84C5Loggc0eMHIU3   # Replace with your TrueNAS API key
+      allowInsecure: true
+    zfs:
+      datasetParentName: HOMELAB/k8s/nfs/v  # Replace with your dataset path (e.g., pool/k8s/nfs)
+      detachedSnapshotsDatasetParentName: HOMELAB/k8s/nfs/s
+      datasetEnableQuotas: true
+      datasetEnableReservation: false
+      datasetPermissionsMode: "0777"
+      datasetPermissionsUser: 0
+      datasetPermissionsGroup: 0
+    nfs:
+      shareHost: 192.168.0.123  # Replace with your TrueNAS IP
+      shareAlldirs: false
+      shareAllowedHosts: []
+      shareAllowedNetworks: []
+      shareMaprootUser: root
+      shareMaprootGroup: root

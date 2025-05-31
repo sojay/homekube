@@ -34,7 +34,7 @@ spec:
             localpv:
               enabled: true
           loki-stack:
-            enabled: false
+          enabled: false
     openebs-crds:
       csi:
         volumeSnapshots:
