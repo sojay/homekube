@@ -49,7 +49,7 @@ spec:
           machine-learning:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.121.0
+              tag: v1.134.0
             env:
               IMMICH_WEB_URL: https://immich.samboxlab.top
               IMMICH_SERVER_URL: https://immich.samboxlab.top
