@@ -98,15 +98,15 @@ spec:
           - path: /usr/src/app/upload
       thumbs:
         type: persistentVolumeClaim
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
+        storageClass: nfs
+        accessMode: ReadWriteMany
         size: 50Gi
         globalMounts:
           - path: /usr/src/app/upload/thumbs
       profile:
         type: persistentVolumeClaim
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
+        storageClass: nfs
+        accessMode: ReadWriteMany
         size: 10Gi
         globalMounts:
           - path: /usr/src/app/upload/profile
