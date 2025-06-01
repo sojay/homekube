@@ -51,8 +51,8 @@ spec:
     persistence:
       data:
         type: persistentVolumeClaim
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
+        storageClass: nfs
+        accessMode: ReadWriteMany
         size: 5Gi
         globalMounts:
           - path: /var/lib/postgresql/data
