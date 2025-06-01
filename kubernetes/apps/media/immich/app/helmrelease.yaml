@@ -86,7 +86,7 @@ spec:
         tls:
           - hosts:
               - immich.samboxlab.top
-            secretName: immich-tls
+            secretName: samboxlab-top-production-tls
 
     persistence:
       library:
