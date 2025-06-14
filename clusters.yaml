@@ -37,7 +37,7 @@ cluster_api_tls_sans: ["homekube.samboxlab.top"]
 
 # -- The Load balancer IP for k8s_gateway, this provides DNS to all your ingresses when split DNS is configured on your internal DNS server (Dnsmasq, Pi-hole, etc)
 #    (REQUIRED) / (NOTE: Choose an unused IP in node_cidr)
-cluster_dns_gateway_addr: "192.168.0.35"
+cluster_dns_gateway_addr: "192.168.0.147"
 
 # -- The Load balancer IP for the internal ingress-nginx controller
 #    (REQUIRED) / (NOTE: Choose an unused IP in node_cidr)

@@ -6,7 +6,12 @@ resources:
   - ./cilium.yaml
   - ./coredns.yaml
   - ./democratic-csi.yaml
+  - ./emberstack.yaml
+  - ./external-dns.yaml
+  - ./grafana.yaml
+  - ./ingress-nginx.yaml
   - ./jetstack.yaml
+  - ./k8s-gateway.yaml
   - ./longhorn.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
@@ -14,7 +19,4 @@ resources:
   - ./prometheus-community.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./external-dns.yaml
-  - ./ingress-nginx.yaml
-  - ./k8s-gateway.yaml
   - ./volsync.yaml

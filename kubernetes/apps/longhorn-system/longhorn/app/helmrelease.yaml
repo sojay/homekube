@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: 1.9.0
+      version: 1.8.1
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -26,15 +26,12 @@ spec:
 
     # Persistence settings
     persistence:
-      defaultClass: false                    # Don't make it default
-      defaultClassReplicaCount: 1           # 1 replica for 2-node setup
+      defaultClass: false
+      defaultClassReplicaCount: 1
       reclaimPolicy: Retain
       migratable: false
-      recurringJobSelector:
-        enable: true
-        jobList: '[{"name":"backup", "schedule":"0 2 * * *", "task":"backup"}]'
 
-    # CSI settings optimized for mixed workloads
+    # CSI settings
     csi:
       kubeletRootDir: /var/lib/kubelet
       attacherReplicaCount: 1
@@ -42,13 +39,9 @@ spec:
       resizerReplicaCount: 1
       snapshotterReplicaCount: 1
 
-    # UI and monitoring
+    # UI settings
     ui:
       replicas: 1
-
-    # Engine settings for better performance
-    engine:
-      replicaReplenishmentWaitInterval: 600
 
     # Manager settings
     manager:

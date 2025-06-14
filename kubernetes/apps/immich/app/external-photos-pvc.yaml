@@ -1,0 +1,47 @@
+---
+# Simple NFS PVC using existing NFS provisioner
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-external-photos
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  resources:
+    requests:
+      storage: 100Gi  # Adjust based on your iCloud photos size
+---
+# Alternative: Manual PV for specific NFS path
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-icloud-photos-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-manual
+  nfs:
+    server: 192.168.0.123  # Your TrueNAS IP
+    path: /mnt/main/sambox/iCloud  # NFS export path to your iCloud photos
+    readOnly: true
+  claimRef:
+    namespace: media
+    name: immich-external-photos-manual
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-external-photos-manual
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs-manual
+  resources:
+    requests:
+      storage: 100Gi

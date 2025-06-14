@@ -3,7 +3,6 @@ set -Eeuo pipefail
 
 source "$(dirname "${0}")/lib/common.sh"
 
-export LOG_LEVEL="debug"
 export ROOT_DIR="$(git rev-parse --show-toplevel)"
 
 # Talos requires the nodes to be 'Ready=False' before applying resources

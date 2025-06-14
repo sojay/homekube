@@ -50,6 +50,7 @@ spec:
       persistence:
         enabled: true
         storageClassName: longhorn
+        accessModes: ["ReadWriteOnce"]
         size: 5Gi
       plugins:
         - grafana-clock-panel
@@ -68,7 +69,7 @@ spec:
           provider:
             foldersFromFilesStructure: true
         datasources:
-          enabled: false
+          enabled: true
           searchNamespace: ALL
       # Configure data sources with correct namespace URLs
       forceDeployDatasources: true
@@ -92,6 +93,17 @@ spec:
               access: proxy
               jsonData:
                 handleGrafanaManagedAlerts: false
+            - name: Loki
+              type: loki
+              uid: loki
+              url: http://loki-gateway.observability:80
+              access: proxy
+              jsonData:
+                maxLines: 1000
+                derivedFields:
+                  - name: "TraceID"
+                    matcherRegex: "trace_id=(\\w+)"
+                    url: "$${__value.raw}"
     prometheus:
       enabled: true
       ingress:
@@ -108,8 +120,8 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
-              accessModes: ["ReadWriteOnce"]
+              storageClassName: nfs
+              accessModes: ["ReadWriteMany"]
               resources:
                 requests:
                   storage: 5Gi

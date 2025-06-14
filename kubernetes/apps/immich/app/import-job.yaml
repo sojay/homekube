@@ -1,0 +1,82 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: immich-import-icloud
+  namespace: media
+spec:
+  template:
+    spec:
+      containers:
+      - name: immich-cli
+        image: ghcr.io/immich-app/immich-cli:latest
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            echo "Starting Immich import job..."
+            echo "Server: $IMMICH_SERVER_URL"
+            echo "Upload path: $UPLOAD_PATH"
+            echo "Concurrency: $CONCURRENCY"
+
+            # Wait for Immich to be ready
+            echo "Waiting for Immich server to be ready..."
+            sleep $STARTUP_DELAY
+
+            # Test server connectivity
+            curl -f "$IMMICH_SERVER_URL/api/server/ping" || {
+              echo "ERROR: Cannot reach Immich server"
+              exit 1
+            }
+
+            # Import photos using Immich CLI
+            echo "Starting photo import..."
+            immich upload \
+              --recursive $UPLOAD_PATH \
+              --server $IMMICH_SERVER_URL \
+              --key $IMMICH_API_KEY \
+              --concurrency $CONCURRENCY \
+              --skip-hash \
+              --delete-after-upload false
+
+            echo "Import completed!"
+
+        env:
+        # Required: API key from secret
+        - name: IMMICH_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: immich-api-key
+              key: api-key
+
+        # Direct value environment variables
+        - name: IMMICH_SERVER_URL
+          value: "http://immich-server:3001"
+        - name: UPLOAD_PATH
+          value: "/external-photos"
+        - name: CONCURRENCY
+          value: "3"
+        - name: STARTUP_DELAY
+          value: "60"
+
+        # Optional: Pod info for logging
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+
+        volumeMounts:
+        - name: external-photos
+          mountPath: /external-photos
+          readOnly: true
+
+      volumes:
+      - name: external-photos
+        persistentVolumeClaim:
+          claimName: immich-external-photos
+      restartPolicy: Never
+  backoffLimit: 3

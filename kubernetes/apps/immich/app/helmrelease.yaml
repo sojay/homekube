@@ -1,0 +1,113 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      immich:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            env:
+              DB_DATABASE_NAME: immich
+              DB_HOSTNAME: immich-postgresql
+              DB_PASSWORD: 7jN!CeA##pySi5
+              DB_USERNAME: immich
+              IMMICH_SERVER_URL: https://immich.samboxlab.top
+              IMMICH_WEB_URL: https://immich.samboxlab.top
+              LOG_LEVEL: info
+              REDIS_HOSTNAME: immich-redis
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.134.0
+            resources:
+              limits:
+                memory: 2Gi
+              requests:
+                cpu: 100m
+                memory: 250Mi
+          machine-learning:
+            env:
+              IMMICH_SERVER_URL: https://immich.samboxlab.top
+              IMMICH_WEB_URL: https://immich.samboxlab.top
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v1.134.0
+            resources:
+              limits:
+                memory: 2Gi
+              requests:
+                cpu: 100m
+                memory: 250Mi
+        strategy: Recreate
+
+    ingress:
+      app:
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+        className: internal
+        hosts:
+        - host: immich.samboxlab.top
+          paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
+
+    persistence:
+      library:
+        accessMode: ReadWriteMany
+        globalMounts:
+        - path: /usr/src/app/upload
+        size: 500Gi
+        storageClass: nfs
+        type: persistentVolumeClaim
+      profile:
+        accessMode: ReadWriteMany
+        globalMounts:
+        - path: /usr/src/app/upload/profile
+        size: 10Gi
+        storageClass: nfs
+        type: persistentVolumeClaim
+      thumbs:
+        accessMode: ReadWriteMany
+        globalMounts:
+        - path: /usr/src/app/upload/thumbs
+        size: 50Gi
+        storageClass: nfs
+        type: persistentVolumeClaim
+      external-photos:
+        type: persistentVolumeClaim
+        existingClaim: immich-external-photos
+        globalMounts:
+        - path: /external-photos
+          readOnly: true
+
+    service:
+      app:
+        controller: immich
+        ports:
+          http:
+            port: 2283
