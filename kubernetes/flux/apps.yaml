@@ -54,3 +54,19 @@ spec:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
         labelSelector: substitution.flux.home.arpa/disabled notin (true)
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-repositories
+  namespace: flux-system
+spec:
+  interval: 30m
+  path: ./kubernetes/flux/repositories/helm
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  resources:
+    - ./apps
+    - ./repositories/helm
