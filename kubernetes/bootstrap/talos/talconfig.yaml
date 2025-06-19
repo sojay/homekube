@@ -52,7 +52,7 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
-        mtu: 
+        mtu:
   - hostname: "talos-worker02"
     ipAddress: "192.168.0.236"
     installDisk: "/dev/sda"

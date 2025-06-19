@@ -26,4 +26,5 @@ worker.yaml
 nodess.yaml
 new-talosconfig
 .sops.yaml
+.cursor/.cursorrules
 
