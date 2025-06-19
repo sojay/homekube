@@ -5,6 +5,7 @@ resources:
   - ./cert-manager
   - ./default
   - ./flux-system
+  - ./homepage
   - ./kube-system
   - ./longhorn-system
   - ./media
