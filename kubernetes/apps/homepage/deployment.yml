@@ -23,15 +23,14 @@ spec:
     metadata:
       labels:
         app: homepage
-      annotations:
-        deploy-date: "deploy-date-value"
     spec:
+      serviceAccountName: homepage
       containers:
         - name: homepage
           image: ghcr.io/gethomepage/homepage:latest
           env:
           -  name: HOMEPAGE_ALLOWED_HOSTS
-             value: "dashboard.samboxlab.top,192.168.0.129:3000"
+             value: "dashboard.samboxlab.top"
           envFrom:
           - secretRef:
               name: homepage-secret

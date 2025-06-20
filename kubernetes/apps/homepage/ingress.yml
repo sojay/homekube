@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/target: external.samboxlab.top
     gethomepage.dev/description: Dynamically Detected Homepage
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Cluster Management
@@ -19,16 +18,16 @@ metadata:
   name: homepage
   namespace: myapps
 spec:
-  ingressClassName: external
+  ingressClassName: internal
   rules:
   - host: dashboard.samboxlab.top
     http:
       paths:
       - backend:
           service:
-            name: homepage-svc  # Ensure the correct service name
+            name: homepage-svc
             port:
-              number: 3000  # Since you have LoadBalancer service mapping 80 to 5001
+              number: 3000
         path: /
         pathType: Prefix
   tls:
