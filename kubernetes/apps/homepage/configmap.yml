@@ -120,14 +120,6 @@ data:
                 type: pihole
                 url: "{{HOMEPAGE_VAR_PIHOLE_URL_2}}"
                 key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY_2}}"
-        - Pi-Hole3:
-            icon: pi-hole.svg
-            href: "{{HOMEPAGE_VAR_PIHOLE_URL_3}}"
-            description: electron
-            widget:
-                type: pihole
-                url: "{{HOMEPAGE_VAR_PIHOLE_URL_3}}"
-                key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY_3}}"
     - Network:
         - UniFi:
             icon: unifi.svg
@@ -177,11 +169,6 @@ data:
                 url: "{{HOMEPAGE_VAR_PLEX_URL}}"
                 key: "{{HOMEPAGE_VAR_PLEX_API_TOKEN}}"
     - Remote Access:
-        - PiKVM:
-            icon: https://avatars.githubusercontent.com/u/41749659?s=200&v=4
-            href: "{{HOMEPAGE_VAR_PIKVM_URL}}"
-            description: remote kvm
-
         - UniFi:
             icon: https://play-lh.googleusercontent.com/DmgQvSdocOrGr0D0rxSBE9sqh23Fw3ck3BgKRN788cZnOKgcZlcEAFRYwmUbp6vMTVI
             href: "{{HOMEPAGE_VAR_UNIFI_PROTECT_URL}}"
