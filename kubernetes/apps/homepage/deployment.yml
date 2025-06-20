@@ -32,6 +32,9 @@ spec:
           env:
           -  name: HOMEPAGE_ALLOWED_HOSTS
              value: "dashboard.samboxlab.top,192.168.0.129:3000"
+          envFrom:
+          - secretRef:
+              name: homepage-secret
           resources:
             requests:
               memory: 128Mi
