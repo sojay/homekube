@@ -7,7 +7,7 @@ metadata:
     app: homepage
 data:
   kubernetes.yaml: |
-    mode: cluster
+    mode: disabled
   settings.yaml: |
     title: Home Lab Dashboard
 
