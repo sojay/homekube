@@ -5,6 +5,7 @@ resources:
   - namespace.yml
   - serviceaccount.yml
   - clusterrole.yml
+  - secret.yml
   - configmap.yml
   - deployment.yml
   - service.yml
