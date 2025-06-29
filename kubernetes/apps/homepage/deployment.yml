@@ -31,9 +31,6 @@ spec:
           env:
           -  name: HOMEPAGE_ALLOWED_HOSTS
              value: "dashboard.samboxlab.top"
-          envFrom:
-          - secretRef:
-              name: homepage-secret
           resources:
             requests:
               memory: 128Mi
@@ -45,7 +42,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             periodSeconds: 10
             failureThreshold: 5
             timeoutSeconds: 5
@@ -53,7 +50,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
           volumeMounts:
