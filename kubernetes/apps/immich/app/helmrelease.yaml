@@ -51,7 +51,7 @@ spec:
               IMMICH_WEB_URL: https://immich.samboxlab.top
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.134.0
+              tag: v2.2.3
             resources:
               limits:
                 memory: 2Gi
