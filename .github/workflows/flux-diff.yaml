@@ -46,15 +46,20 @@ jobs:
             --limit-bytes 10000
             --all-namespaces
             --sources "home-kubernetes"
-            --output-file diff.patch
+            --output-file /github/workspace/diff.patch
 
       - name: Generate Diff
         id: diff
         run: |
-          cat diff.patch
-          echo "diff<<EOF" >> $GITHUB_OUTPUT
-          cat diff.patch >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          if [ -f diff.patch ]; then
+            cat diff.patch
+            echo "diff<<EOF" >> $GITHUB_OUTPUT
+            cat diff.patch >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "diff.patch not found" >&2
+            exit 1
+          fi
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment

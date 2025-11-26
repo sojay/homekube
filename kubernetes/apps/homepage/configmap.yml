@@ -11,6 +11,10 @@ data:
   settings.yaml: |
     title: Home Lab Dashboard
 
+    providers:
+      openweathermap: false
+      weatherapi: false
+
     background:
       image: https://cdnb.artstation.com/p/assets/images/images/006/897/659/large/mikael-gustafsson-wallpaper-mikael-gustafsson.jpg
       blur: sm # sm, md, xl... see https://tailwindcss.com/docs/backdrop-blur
@@ -23,11 +27,14 @@ data:
 
     useEqualHeights: true
 
+    hideVersion: true
+    disableCollapse: true
+
     layout:
       Hypervisor:
         header: true
         style: row
-        columns: 4
+        columns: 2
       Containers:
         header: true
         style: row
@@ -35,7 +42,7 @@ data:
       DNS:
         header: true
         style: row
-        columns: 4
+        columns: 1
       Network:
         header: true
         style: row
@@ -64,34 +71,40 @@ data:
   custom.js: ""
   bookmarks.yaml: ""
   services.yaml: |
-    - Containers:
+    - Lab Services:
         - Longhorn:
             icon: longhorn.svg
             href: "https://longhorn.samboxlab.top"
-            description: k8s storage
-    - Network:
+            description: storage
+        - Grafana:
+            icon: grafana.svg
+            href: "https://grafana.samboxlab.top"
+            description: monitoring
+        - Prometheus:
+            icon: prometheus.svg
+            href: "https://prometheus.samboxlab.top"
+            description: metrics
         - Uptime Kuma:
             icon: uptime-kuma.svg
             href: "https://monitor.samboxlab.top"
             description: monitoring
-    - Storage:
-        - TrueNAS:
-            icon: truenas.svg
-            href: "https://nas.local.samboxlab.com"
-            description: scale
-        - MinIO:
-            icon: minio.svg
-            href: "https://minio.local.samboxlab.com"
-            description: object storage
-    - Other:
-        - Gitea:
-            icon: gitea.svg
-            href: https://git.local.samboxlab.com
-            description: source code
+    - External:
         - GitHub:
             icon: github.svg
             href: https://github.com/sojay
-            description: source code
+            description: code
+        - TrueNAS:
+            icon: truenas.svg
+            href: "https://nas.local.samboxlab.com"
+            description: storage
+        - MinIO:
+            icon: minio.svg
+            href: "https://minio.local.samboxlab.com"
+            description: s3
+        - Gitea:
+            icon: gitea.svg
+            href: https://git.local.samboxlab.com
+            description: git
 
   widgets.yaml: |
     - resources:
