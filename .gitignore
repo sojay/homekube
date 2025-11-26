@@ -31,3 +31,4 @@ new-talosconfig
 /.cursor/
 CLAUDE.md
 .claude
+config.yaml
