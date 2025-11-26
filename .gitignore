@@ -29,6 +29,5 @@ new-talosconfig
 .sops.yaml
 .cursor/.cursorrules
 /.cursor/
-**CLAUDE
-./CLAUDE.md
-
+CLAUDE.md
+.claude
